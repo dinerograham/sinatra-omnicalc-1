@@ -1,21 +1,13 @@
 <h1>Payment Results</h1>
 
 <div>APR</div>
-<div><%= @apr %></div>
+<div><%= @apr.to_formatted_s(:percentage, precision: 4) %></div>
 <div>Number of years</div>
 <div><%= @years %></div>
 <div>Principal</div>
-<div><%= @principal %></div>
+<div><%= @principal.to_formatted_s(:currency) %></div>
 <div>Payment</div>
-<div><%= @payment %></div>
-
-<div><%= @rate %></div>
-<div><%=@periods%></div>
-<div><%= @numer %></div>
-<div><%= @expo %></div>
-<div><%= @oneplus %></div>
-<div><%= @minus %></div>
-<div><%= @denom %></div>
+<div><%= @payment.to_formatted_s(:currency) %></div>
 
 </div>
 <a href="/payment/new">

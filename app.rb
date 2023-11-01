@@ -32,16 +32,18 @@ end
 
 get("/payment/results") do
   @principal = params.fetch("user_pv").to_i
-  .to_formatted_s(:currency)
   @years = params.fetch("user_years").to_i
-  @apr = params.fetch("user_apr").to_f.to_formatted_s(:percentage, precision: 4)
-  @rate = @apr./100
+  @apr = params.fetch("user_apr").to_f
+  @rate = @apr/100/12
   @numer = @principal*@rate
   @periods = @years*12
-  @expo = -@periods
-  @oneplus = 1+@rate
-  @minus = @oneplus**@periods
-  @denom = 1-@minus
+
+  @denom = 1-((1+@rate)**-@periods)
+  # @expo = -@periods
+  # @oneplus = 1+@rate
+  # @minus = @oneplus**@periods
+  @minus = (1+@rate)**-@periods
+  # @denom = 1-@minus
   @payment = @numer/@denom
   erb(:finance)
 end  
